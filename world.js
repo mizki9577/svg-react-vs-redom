@@ -1,9 +1,14 @@
 class World {
   constructor() {
     this.particles = []
-    for (let i = 0; i < 100; ++i) {
+    for (let id = 0; id < 100; ++id) {
+      const r = Math.floor(Math.random() * 256)
+      const g = Math.floor(Math.random() * 256)
+      const b = Math.floor(Math.random() * 256)
+      const a = (r + g + b) / 765
+      const color = `rgba(${[r, g, b, a].join(', ')})`
       this.particles.push({
-        id: i,
+        id, color,
         x: Math.random(),
         y: Math.random(),
         dx: (Math.random() - 0.5) / 100,
@@ -21,15 +26,12 @@ class World {
   }
 
   update() {
-    const nextState = this.particles.map(({id, x, y, dx, dy}) => {
+    const nextState = this.particles.map(({x, y, dx, dy, ...rest}) => {
       dx = x < 0 || 1 < x ? -dx : dx
       dy = y < 0 || 1 < y ? -dy : dy
-      return {
-        id,
-        x: x + dx,
-        y: y + dy,
-        dx, dy,
-      }
+      x += dx
+      y += dy
+      return { x, y, dx, dy, ...rest }
     })
     this.particles = nextState
 

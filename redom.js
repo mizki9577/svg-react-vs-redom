@@ -9,6 +9,7 @@ class Particle {
   update(data) {
     this.el.setAttribute('cx', data.x)
     this.el.setAttribute('cy', data.y)
+    this.el.style.fill = data.color
   }
 }
 

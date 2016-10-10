@@ -20,8 +20,8 @@ class App extends React.Component {
   render() {
     return (
       <svg width={800} height={800} viewBox="0 0 1 1">
-        { this.state.particles.map(({id, x, y}) => (
-          <circle key={id} cx={x} cy={y} r={0.01} />
+        { this.state.particles.map(({id, color, x, y}) => (
+          <circle key={id} cx={x} cy={y} r={0.01} style={{ fill: color }} />
         )) }
       </svg>
     )
