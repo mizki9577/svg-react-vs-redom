@@ -3,18 +3,19 @@ import world from './world'
 
 class Particle {
   constructor() {
-    this.el = svg('circle', { r: 0.01 })
+    this.el = svg('circle')
   }
 
   update(data) {
     this.el.setAttribute('cx', data.x)
     this.el.setAttribute('cy', data.y)
+    this.el.setAttribute('r',  data.r)
     this.el.style.fill = data.color
   }
 }
 
 const app = list(svg('svg', { width: 800, height: 800, viewBox: '0 0 1 1' }), Particle, 'id')
-world.register(::app.update)
+world.callback = ::app.update
 
 document.addEventListener('DOMContentLoaded', () => {
   mount(document.getElementById('root'), app)

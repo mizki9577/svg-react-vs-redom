@@ -1,24 +1,22 @@
 class World {
   constructor() {
     this.particles = []
-    for (let id = 0; id < 100; ++id) {
-      const r = Math.floor(Math.random() * 256)
-      const g = Math.floor(Math.random() * 256)
-      const b = Math.floor(Math.random() * 256)
-      const a = (r + g + b) / 765
-      const color = `rgba(${[r, g, b, a].join(', ')})`
+    for (let id = 0; id < 1000; ++id) {
+      const red   = Math.floor(Math.random() * 256)
+      const green = Math.floor(Math.random() * 256)
+      const blue  = Math.floor(Math.random() * 256)
+      const alpha = (red + green + blue) / 765
+      const color = `rgba(${[red, green, blue, alpha].join(', ')})`
+
       this.particles.push({
         id, color,
         x: Math.random(),
         y: Math.random(),
+        r: 0.01,
         dx: (Math.random() - 0.5) / 100,
         dy: (Math.random() - 0.5) / 100,
       })
     }
-  }
-
-  register(callback) {
-    this.callback = callback
   }
 
   start() {
@@ -35,7 +33,9 @@ class World {
     })
     this.particles = nextState
 
-    this.callback(this.particles)
+    if (this.callback) {
+      this.callback(this.particles)
+    }
     requestAnimationFrame(::this.update)
   }
 }
