@@ -1,3 +1,5 @@
+import webpack from 'webpack'
+
 export default {
   entry: {
     react: './react.js',
@@ -16,6 +18,12 @@ export default {
       },
     ],
   },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    })
+  ],
 }
 
 // vim: set ts=2 sw=2 et:
