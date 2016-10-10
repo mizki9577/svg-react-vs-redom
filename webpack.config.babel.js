@@ -5,13 +5,6 @@ export default {
   },
   output: {
     filename: '[name].bundle.js',
-    path: './',
-  },
-
-  devtool: 'inline-source-map',
-
-  devServer: {
-    contentBase: './',
   },
 
   module: {
